@@ -30,6 +30,9 @@ before_install:
   - if [ "${TRAVIS_OS_NAME}" == "osx" -a "${CC}" == "gcc" ]; then export CC=gcc-4.8; fi
 
 script:
+  - wget https://github.com/adah1972/libunibreak/releases/download/libunibreak_4_0/libunibreak-4.0.tar.gz
+  - (tar xf libunibreak-4.0.tar.gz && cd libunibreak-4.0 && ./configure && make && sudo make install)
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo ldconfig; fi
   - ./autogen.sh
   - ./configure --enable-gtk-doc
   - make
